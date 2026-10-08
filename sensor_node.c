@@ -2,6 +2,8 @@
 #include "pico/stdlib.h"
 #include "pico/cyw43_arch.h"
 
+#define RADAR_PIN 14
+#define PIR_PIN 15
 
 
 
@@ -15,22 +17,27 @@ int main()
         return -1;
     }
 
-    // Initialize the GPIO pin for the motion sensor
-    gpio_init(15);
-    gpio_set_dir(15, GPIO_IN);
+    // Initialize the GPIO pins
+    gpio_init(PIR_PIN);
+    gpio_set_dir(PIR_PIN, GPIO_IN);
+    gpio_pull_down(PIR_PIN);
 
 
-    gpio_init(14);
-    gpio_set_dir(14, GPIO_IN);
+    gpio_init(RADAR_PIN);
+    gpio_set_dir(RADAR_PIN, GPIO_IN);
+    gpio_pull_down(RADAR_PIN);
+
 
     bool lastPIRReading = 0;
     bool lastRadarReading = 0;
 
+    sleep_ms(3000);
+
     // Main loop to continuously read the motion sensor and control the LED
     while (true) {
 
-        bool PIRCurrent = gpio_get(15);
-        bool radarCurrent = gpio_get(14);
+        bool PIRCurrent = gpio_get(PIR_PIN);
+        bool radarCurrent = gpio_get(RADAR_PIN);
 
         if (PIRCurrent != lastPIRReading) {
             if (PIRCurrent) {
