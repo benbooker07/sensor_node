@@ -39,24 +39,38 @@ int main()
         bool PIRCurrent = gpio_get(PIR_PIN);
         bool radarCurrent = gpio_get(RADAR_PIN);
 
-        if (PIRCurrent != lastPIRReading) {
-            if (PIRCurrent) {
+        if (PIRCurrent != lastPIRReading) 
+        {
+            if (PIRCurrent) 
+            {
                 printf("PIR Motion Detected\n");
-            } else {
+            } 
+            
+            else 
+            {
                 printf("No PIR Motion      \n");
             }
         }
 
-        if (radarCurrent || PIRCurrent) {
+        if (radarCurrent || PIRCurrent) 
+        {
             cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
-        } else { 
+        } 
+
+        else 
+        { 
             cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
         }
 
-        if (radarCurrent != lastRadarReading) {
-            if (radarCurrent) {
+        if (radarCurrent != lastRadarReading) 
+        {
+            if (radarCurrent) 
+            {
                 printf("Radar Detected\n");
-            } else {
+            } 
+
+            else 
+            {
                 printf("No Radar      \n");
             }
         }
