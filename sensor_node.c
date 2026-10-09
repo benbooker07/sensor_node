@@ -5,8 +5,6 @@
 #define RADAR_PIN 14
 #define PIR_PIN 15
 
-
-
 int main()
 {
     stdio_init_all();
@@ -22,12 +20,11 @@ int main()
     gpio_set_dir(PIR_PIN, GPIO_IN);
     gpio_pull_down(PIR_PIN);
 
-
     gpio_init(RADAR_PIN);
     gpio_set_dir(RADAR_PIN, GPIO_IN);
     gpio_pull_down(RADAR_PIN);
 
-
+    // Set starting logic values for last sensor reading
     bool lastPIRReading = 0;
     bool lastRadarReading = 0;
 
